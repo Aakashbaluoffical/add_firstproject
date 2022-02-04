@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block  content %}
+
+    <div
+      class="app-container d-flex align-items-center justify-content-center flex-column"
+      ng-app="myApp"
+      ng-controller="myController"
+    >
+      {{ task_name }}
+      <h3>Todo App</h3>
+      <div class="d-flex align-items-center mb-3">
+        <div class="form-group mr-3 mb-0">
+          <input
+            ng-model="yourTask"
+            type="text"
+            class="form-control"
+            id="formGroupExampleInput"
+            placeholder="Enter a task here"
+          />
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary mr-3"
+          ng-click="saveTask()"
+        >
+          Save
+        </button>
+        <button type="button" class="btn btn-warning" ng-click="getTask()">
+          Get Tasks
+        </button>
+      </div>
+      {{ yourName }}
+      <div class="table-wrapper">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Todo item</th>
+              <th>status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="task in tasks"
+              class="{{ task.status ? 'table-success' : 'table-light' }}"
+            >
+              <td>{{ $index + 1 }}</td>
+              <td class="{{ task.status ? 'complete' : 'task' }}">
+                {{ task.task_name }}
+              </td>
+              <td>{{ task.status ? "Completed" : "In progress" }}</td>
+              <td>
+                <button class="btn btn-danger" ng-click="delete($index)">
+                  Delete
+                </button>
+                <button class="btn btn-success" ng-click="finished($index)">
+                  Finished
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+{% endblock %}
+
+
